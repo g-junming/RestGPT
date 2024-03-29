@@ -209,7 +209,7 @@ class ResponseParser(Chain):
             response_schema = json.dumps(api_doc['responses']['content']['application/json']["schema"]['properties'], indent=4)
         elif 'application/json; charset=utf-8' in api_doc['responses']['content']:
             response_schema = json.dumps(api_doc['responses']['content']['application/json; charset=utf-8']["schema"]['properties'], indent=4)
-        encoder = tiktoken.encoding_for_model('text-davinci-003')
+        encoder = tiktoken.encoding_for_model('gpt-3.5-turbo-instruct')
         encoded_schema = encoder.encode(response_schema)
         max_schema_length = 2500
         if len(encoded_schema) > max_schema_length:
@@ -351,7 +351,7 @@ class SimpleResponseParser(Chain):
                 },
                 input_variables=["query", "json", "api_param", "response_description"]
             )
-            encoder = tiktoken.encoding_for_model('text-davinci-003')
+            encoder = tiktoken.encoding_for_model('gpt-3.5-turbo-instruct')
             super().__init__(llm=llm, llm_parsing_prompt=llm_parsing_prompt, encoder=encoder)
             return
 
@@ -364,7 +364,7 @@ class SimpleResponseParser(Chain):
             input_variables=["query", "json", "api_param", "response_description"]
         )
 
-        encoder = tiktoken.encoding_for_model('text-davinci-003')
+        encoder = tiktoken.encoding_for_model('gpt-3.5-turbo-instruct')
 
         super().__init__(llm=llm, llm_parsing_prompt=llm_parsing_prompt, encoder=encoder)
 

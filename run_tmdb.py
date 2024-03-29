@@ -14,7 +14,7 @@ logger = logging.getLogger()
 
 
 def run(query, api_spec, requests_wrapper, simple_parser=False):
-    llm = OpenAI(model_name="text-davinci-003", temperature=0.0, max_tokens=256)
+    llm = OpenAI(model_name="gpt-3.5-turbo-instruct", temperature=0.0, max_tokens=256)
     # llm = OpenAI(model_name="gpt-3.5-turbo-0301", temperature=0.0, max_tokens=256)
     rest_gpt = RestGPT(llm, api_spec=api_spec, scenario='tmdb', requests_wrapper=requests_wrapper, simple_parser=simple_parser)
 
